@@ -7,7 +7,7 @@ import pandas as pd
 import os
 
 # Import des dépendances
-from models import get_db, add_object_async
+from models import get_db, add_object
 from models.elevage.piscicole import (
     BassinPiscicole,
     Poisson,
@@ -17,6 +17,7 @@ from models.elevage.piscicole import (
 from utils.security import get_current_manager
 from schemas.elevage.piscicole import (
     BassinBase,
+    BassinCreate,
     BassinResponse,
     PoissonBase,
     PoissonResponse,
@@ -46,9 +47,9 @@ router = APIRouter(
 # Routes pour la gestion des bassins
 # ==============================================
 
-@router.post("/bassins/", response_model=BassinResponse)
-async def create_bassin(
-    bassin: BassinBase,
+@router.post("/bassins", response_model=BassinResponse)
+def create_bassin(
+    bassin: BassinCreate,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
 ):
@@ -57,7 +58,7 @@ async def create_bassin(
     
     try:
         db_bassin = BassinPiscicole(**bassin.model_dump())
-        await add_object_async(db, db_bassin)
+        add_object(db, db_bassin)
         return db_bassin
     except Exception as e:
         db.rollback()
@@ -66,8 +67,8 @@ async def create_bassin(
             detail=f"Erreur lors de la création : {str(e)}"
         )
 
-@router.get("/bassins/", response_model=List[BassinResponse])
-async def read_bassins(
+@router.get("/bassins", response_model=List[BassinResponse])
+def read_bassins(
     skip: int = 0,
     limit: int = 100,
     current_user: dict = Depends(get_current_manager),
@@ -80,7 +81,7 @@ async def read_bassins(
     return bassins
 
 @router.get("/bassins/{bassin_id}", response_model=BassinResponse)
-async def read_bassin(
+def read_bassin(
     bassin_id: int,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -97,7 +98,7 @@ async def read_bassin(
     return bassin
 
 @router.put("/bassins/{bassin_id}", response_model=BassinResponse)
-async def update_bassin(
+def update_bassin(
     bassin_id: int,
     bassin: BassinBase,
     current_user: dict = Depends(get_current_manager),
@@ -129,7 +130,7 @@ async def update_bassin(
         )
 
 @router.delete("/bassins/{bassin_id}")
-async def delete_bassin(
+def delete_bassin(
     bassin_id: int,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -159,8 +160,8 @@ async def delete_bassin(
 # Routes pour la gestion des poissons
 # ==============================================
 
-@router.post("/poissons/", response_model=PoissonResponse)
-async def create_poisson(
+@router.post("/poissons", response_model=PoissonResponse)
+def create_poisson(
     poisson: PoissonBase,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -170,7 +171,7 @@ async def create_poisson(
     
     try:
         db_poisson = Poisson(**poisson.model_dump())
-        await add_object_async(db, db_poisson)
+        add_object(db, db_poisson)
         return db_poisson
     except Exception as e:
         db.rollback()
@@ -179,8 +180,8 @@ async def create_poisson(
             detail=f"Erreur lors de la création : {str(e)}"
         )
 
-@router.get("/poissons/", response_model=List[PoissonResponse])
-async def read_poissons(
+@router.get("/poissons  ", response_model=List[PoissonResponse])
+def read_poissons(
     bassin_id: Optional[int] = None,
     skip: int = 0,
     limit: int = 100,
@@ -198,7 +199,7 @@ async def read_poissons(
     return poissons
 
 @router.get("/poissons/{poisson_id}", response_model=PoissonResponse)
-async def read_poisson(
+def read_poisson(
     poisson_id: int,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -219,7 +220,7 @@ async def read_poisson(
 # ==============================================
 
 @router.post("/controles-eau/", response_model=ControleEauResponse)
-async def create_controle_eau(
+def create_controle_eau(
     controle: ControleEauCreate,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -229,7 +230,7 @@ async def create_controle_eau(
     
     try:
         db_controle = ControleEau(**controle.model_dump())
-        await add_object_async(db, db_controle)
+        add_object(db, db_controle)
         return db_controle
     except Exception as e:
         db.rollback()
@@ -239,7 +240,7 @@ async def create_controle_eau(
         )
 
 @router.get("/controles-eau/", response_model=List[ControleEauResponse])
-async def read_controles_eau(
+def read_controles_eau(
     bassin_id: Optional[int] = None,
     skip: int = 0,
     limit: int = 100,
@@ -261,7 +262,7 @@ async def read_controles_eau(
 # ==============================================
 
 @router.post("/recoltes/", response_model=RecolteResponse)
-async def create_recolte(
+def create_recolte(
     recolte: RecolteCreate,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -271,7 +272,7 @@ async def create_recolte(
     
     try:
         db_recolte = RecoltePoisson(**recolte.model_dump())
-        await add_object_async(db, db_recolte)
+        add_object(db, db_recolte)
         return db_recolte
     except Exception as e:
         db.rollback()
@@ -281,7 +282,7 @@ async def create_recolte(
         )
 
 @router.get("/recoltes/", response_model=List[RecolteResponse])
-async def read_recoltes(
+def read_recoltes(
     bassin_id: Optional[int] = None,
     skip: int = 0,
     limit: int = 100,
@@ -303,7 +304,7 @@ async def read_recoltes(
 # ==============================================
 
 @router.get("/analyses/alertes", response_model=List[AlertePiscicole])
-async def get_alertes_piscicoles(
+def get_alertes_piscicoles(
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
 ):
@@ -315,7 +316,7 @@ async def get_alertes_piscicoles(
     return alertes
 
 @router.post("/predictions/croissance", response_model=PredictionCroissanceOutput)
-async def predict_croissance(
+def predict_croissance(
     input_data: PredictionCroissanceInput,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -344,7 +345,7 @@ async def predict_croissance(
         )
 
 @router.get("/export/data")
-async def export_data(
+def export_data(
     file_type: str = Query("csv", description="Type de fichier (csv ou excel)", regex="^(csv|excel)$"),
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)

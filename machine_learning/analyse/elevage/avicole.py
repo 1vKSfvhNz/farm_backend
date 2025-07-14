@@ -5,7 +5,6 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 import pandas as pd
 from dataclasses import dataclass
-from enum import Enum
 
 # Import des modèles existants
 from models.elevage.avicole import (
@@ -16,12 +15,7 @@ from models.elevage.avicole import (
     TypeProductionAvicoleEnum
 )
 from machine_learning.prediction.elevage.avicole import AvicolePredictor
-
-class AlertSeverity(Enum):
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
-    CRITICAL = "critical"
+from enums import AlertSeverity
 
 @dataclass
 class AvicoleAlert:

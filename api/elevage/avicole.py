@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Query
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from typing import List, Optional
 from datetime import datetime, timedelta
@@ -9,7 +8,7 @@ import pandas as pd
 import os
 
 # Import des dépendances
-from models import get_db, get_async_db
+from models import get_db, add_object
 from models.elevage.avicole import (
     LotAvicole, 
     ControlePonteLot, 
@@ -45,7 +44,7 @@ router = APIRouter(
 # ==============================================
 
 @router.post("/lots/", response_model=LotAvicoleResponse)
-async def create_lot_avicole(
+def create_lot_avicole(
     lot: LotAvicoleCreate,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -55,9 +54,6 @@ async def create_lot_avicole(
     
     try:
         db_lot = LotAvicole(**lot.model_dump())
-        db.add(db_lot)
-        db.commit()
-        db.refresh(db_lot)
         return db_lot
     except Exception as e:
         db.rollback()
@@ -67,7 +63,7 @@ async def create_lot_avicole(
         )
 
 @router.get("/lots/", response_model=List[LotAvicoleResponse])
-async def read_lots_avicoles(
+def read_lots_avicoles(
     skip: int = 0,
     limit: int = 100,
     type_production: Optional[str] = None,
@@ -85,7 +81,7 @@ async def read_lots_avicoles(
     return lots
 
 @router.get("/lots/{lot_id}", response_model=LotAvicoleResponse)
-async def read_lot_avicole(
+def read_lot_avicole(
     lot_id: int,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -102,7 +98,7 @@ async def read_lot_avicole(
     return lot
 
 @router.put("/lots/{lot_id}", response_model=LotAvicoleResponse)
-async def update_lot_avicole(
+def update_lot_avicole(
     lot_id: int,
     lot: LotAvicoleUpdate,
     current_user: dict = Depends(get_current_manager),
@@ -138,7 +134,7 @@ async def update_lot_avicole(
 # ==============================================
 
 @router.post("/controles-ponte/", response_model=ControlePonteResponse)
-async def create_controle_ponte(
+def create_controle_ponte(
     controle: ControlePonteCreate,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -148,9 +144,7 @@ async def create_controle_ponte(
     
     try:
         db_controle = ControlePonteLot(**controle.model_dump())
-        db.add(db_controle)
-        db.commit()
-        db.refresh(db_controle)
+        add_object(db_controle)
         return db_controle
     except Exception as e:
         db.rollback()
@@ -160,7 +154,7 @@ async def create_controle_ponte(
         )
 
 @router.get("/controles-ponte/", response_model=List[ControlePonteResponse])
-async def read_controles_ponte(
+def read_controles_ponte(
     lot_id: Optional[int] = None,
     start_date: Optional[str] = None,
     end_date: Optional[str] = None,
@@ -173,7 +167,6 @@ async def read_controles_ponte(
     check_permissions_manager(current_user, ['avicole_technicien', 'avicole_manager', 'admin'])
     
     query = db.query(ControlePonteLot)
-    
     if lot_id:
         query = query.filter(ControlePonteLot.lot_id == lot_id)
     if start_date:
@@ -189,7 +182,7 @@ async def read_controles_ponte(
 # ==============================================
 
 @router.post("/performances/", response_model=PerformanceCroissanceResponse)
-async def create_performance(
+def create_performance(
     performance: PerformanceCroissanceBase,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -199,9 +192,7 @@ async def create_performance(
     
     try:
         db_perf = PerformanceLotAvicole(**performance.model_dump())
-        db.add(db_perf)
-        db.commit()
-        db.refresh(db_perf)
+        add_object(db_perf)
         return db_perf
     except Exception as e:
         db.rollback()
@@ -215,7 +206,7 @@ async def create_performance(
 # ==============================================
 
 @router.post("/pesees/")
-async def create_pesee(
+def create_pesee(
     pesee_data: dict,
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)
@@ -225,9 +216,7 @@ async def create_pesee(
     
     try:
         db_pesee = PeseeLotAvicole(**pesee_data)
-        db.add(db_pesee)
-        db.commit()
-        db.refresh(db_pesee)
+        add_object(db_pesee)
         return db_pesee
     except Exception as e:
         db.rollback()
@@ -241,32 +230,32 @@ async def create_pesee(
 # ==============================================
 
 @router.get("/analyses/alertes", response_model=List[AvicoleAlert])
-async def get_alertes_avicoles(
+def get_alertes_avicoles(
     current_user: dict = Depends(get_current_manager),
-    async_db: AsyncSession = Depends(get_async_db)
+    db: Session = Depends(get_db)
 ):
     """Obtenir les alertes pour l'élevage avicole"""
     check_permissions_manager(current_user, ['avicole_manager', 'admin'])
     
-    analyzer = AvicoleAnalyzer(async_db)
-    alertes = await analyzer.analyze_farm()
+    analyzer = AvicoleAnalyzer(db)
+    alertes = analyzer.analyze_farm()
     return alertes
 
 @router.get("/predictions/ponte")
-async def predict_ponte(
+def predict_ponte(
     lot_id: int,
     days_ahead: int = 7,
     current_user: dict = Depends(get_current_manager),
-    async_db: AsyncSession = Depends(get_async_db)
+    db: Session = Depends(get_db)
 ):
     """Prédire les performances de ponte"""
     check_permissions_manager(current_user, ['avicole_manager', 'admin'])
     
-    predictor = AvicolePredictor(async_db)
-    await predictor.prepare_training_data()
+    predictor = AvicolePredictor(db)
+    predictor.prepare_training_data()
     
     # Récupérer les données du lot
-    result = await async_db.execute(select(LotAvicole).filter(LotAvicole.id == lot_id))
+    result = db.execute(select(LotAvicole).filter(LotAvicole.id == lot_id))
     lot = result.scalar_one_or_none()
     
     if not lot:
@@ -287,11 +276,11 @@ async def predict_ponte(
         'statut': lot.statut
     }
     
-    prediction = await predictor.predict_ponte_async(prediction_data)
+    prediction = predictor.predict_ponte_async(prediction_data)
     return prediction
 
 @router.get("/export/data")
-async def export_data(
+def export_data(
     file_type: str = Query("csv", description="Type de fichier (csv ou excel)", regex="^(csv|excel)$"),
     current_user: dict = Depends(get_current_manager),
     db: Session = Depends(get_db)

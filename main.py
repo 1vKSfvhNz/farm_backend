@@ -16,6 +16,7 @@ import api.agricole.salade as salade
 import api.agricole.oignon as oignon
 import api.agricole.mais as mais
 
+import api.elevage as elevage
 import api.elevage.avicole as avicole
 import api.elevage.bovin as bovin
 import api.elevage.caprin as caprin
@@ -62,6 +63,7 @@ app.include_router(clients.router)
 app.include_router(devices_clients.router)
 app.include_router(active_notifications.router)
 
+app.include_router(elevage.router)
 app.include_router(avicole.router)
 app.include_router(bovin.router)
 app.include_router(caprin.router)

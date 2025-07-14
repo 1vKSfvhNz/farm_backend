@@ -1,8 +1,8 @@
-"""Create users table
+"""Add type_habitat to bassins_piscicoles
 
-Revision ID: 2c88b9e1cacc
+Revision ID: bb663452a998
 Revises: 
-Create Date: 2025-06-10 03:02:17.905854
+Create Date: 2025-07-14 14:01:04.232236
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '2c88b9e1cacc'
+revision: str = 'bb663452a998'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None

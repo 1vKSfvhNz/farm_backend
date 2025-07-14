@@ -4,9 +4,8 @@ from enum import Enum as PyEnum
 class TypeMilieuPiscicoleEnum(PyEnum):
     EAU_DOUCE = "Eau douce"
     EAU_SAUMATRE = "Eau saumâtre"
-    EAU_MARINE = "Eau marine"
 
-class TypeElevagePiscicoleEnum(PyEnum):
+class TypeHabitatPiscicoleEnum(PyEnum):
     BASSIN = "Bassin"
     CAGE = "Cage"
     ETANG = "Étang"

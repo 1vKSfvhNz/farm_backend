@@ -8,7 +8,7 @@ from enums.elevage.piscicole import (
     EspecePoissonEnum,
     TypeAlimentPoissonEnum,
     TypeMilieuPiscicoleEnum,
-    TypeElevagePiscicoleEnum
+    TypeHabitatPiscicoleEnum
 )
 from typing import Optional
 
@@ -47,7 +47,7 @@ class BassinPiscicole(Base):
     id = Column(Integer, primary_key=True)
     nom = Column(String(100), nullable=False, unique=True, doc="Nom du bassin")
     type_milieu = Column(SqlEnum(TypeMilieuPiscicoleEnum), nullable=False, doc="Type de milieu aquatique")
-    type_elevage = Column(SqlEnum(TypeElevagePiscicoleEnum), nullable=False, doc="Type d'élevage piscicole")
+    type_habitat = Column(SqlEnum(TypeHabitatPiscicoleEnum), nullable=False, doc="Type d'élevage piscicole")
     volume = Column(Float, nullable=False, comment="Volume en mètres cubes (m3)")
     superficie = Column(Float, nullable=False, comment="Superficie en mètres carrés (m2)")
     profondeur_moyenne = Column(Float, nullable=False, comment="Profondeur en mètres (m)")

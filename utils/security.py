@@ -54,19 +54,31 @@ def get_current_manager(token: str = Depends(oauth2_scheme)) -> dict:
         phone: str = payload.get("sub")
         id: str = payload.get("id")
         if phone is None:
-            raise ValueError("Invalid token - missing sub claim")
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Token invalide (claim sub manquant)",
+                headers={"WWW-Authenticate": "Bearer"},
+            )
         return {"phone": phone, "id": id}
-    except DecodeError as e:
+    except DecodeError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Token invalide ou mal formé.",
             headers={"WWW-Authenticate": "Bearer"},
         )
     except ExpiredSignatureError:
-        raise ValueError("Token expired")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Le token a expiré.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     except PyJWTError as e:
-        raise ValueError(f"Invalid token: {str(e)}")
-
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=f"Token invalide : {str(e)}",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
 def get_current_user_from_token(token: str) -> dict:
     try:
         # Décodage du token avec vérification stricte

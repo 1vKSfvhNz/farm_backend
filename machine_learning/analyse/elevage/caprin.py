@@ -3,7 +3,7 @@ from typing import List, Dict, Optional, Union
 from sqlalchemy import and_, or_, func, select
 from sqlalchemy.orm import joinedload, Session
 from sqlalchemy.ext.asyncio import AsyncSession
-from models import get_db_session
+from models import get_db
 from models.elevage.caprin import Caprin, ControleLaitierCaprin
 from models.elevage import Animal, ProductionLait, Evenement
 from machine_learning.prediction.elevage.caprin import CaprinProductionPredictor
@@ -46,7 +46,7 @@ class CaprinAnalysis:
     """
     
     def __init__(self, db_session: Optional[Union[Session, AsyncSession]] = None):
-        self.db = db_session if db_session else get_db_session()
+        self.db = db_session if db_session else get_db()
         self.is_async = isinstance(db_session, AsyncSession) if db_session else False
         self.production_predictor = CaprinProductionPredictor()
         
