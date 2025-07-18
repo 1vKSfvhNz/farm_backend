@@ -1,8 +1,23 @@
-env/
+# Ignorer l'environnement Python
+Backend/venv/
+
+# Ignorer les dépendances Node.js
+Frontend/node_modules/
+
+# macOS et Xcode
+.DS_Store
+*.xcuserdata
+*.xcworkspace/xcuserdata
+DerivedData/
+Pods/
+
+# React Native & autres caches
+*.log
+tmp/
 .env
+*.env.local
+*.env.*
+
+# Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-*.log
-uploads/
