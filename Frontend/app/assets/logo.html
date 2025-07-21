@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Agricole avec Téléchargement</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap');
+        
+        .static-logo {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(145deg, #f5fff4, #e0f7e0);
+            padding: 20px 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.15);
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+            margin-bottom: 20px;
+        }
+        
+        .logo-icon {
+            width: 80px;
+            height: 80px;
+            margin-right: 25px;
+            position: relative;
+        }
+        
+        .farm-house {
+            position: absolute;
+            width: 40px;
+            height: 30px;
+            background: #8d6e63;
+            bottom: 15px;
+            left: 20px;
+            border-radius: 5px 5px 0 0;
+            z-index: 2;
+        }
+        
+        .roof {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 15px solid #6d4c41;
+            bottom: 45px;
+            left: 20px;
+            z-index: 3;
+        }
+        
+        .barn-door {
+            position: absolute;
+            width: 12px;
+            height: 18px;
+            background: #5d4037;
+            bottom: 15px;
+            left: 34px;
+            border-radius: 2px;
+            z-index: 3;
+        }
+        
+        .animal {
+            position: absolute;
+            width: 16px;
+            height: 10px;
+            background: #5d4037;
+            border-radius: 8px;
+            bottom: 10px;
+            left: 32px;
+            z-index: 1;
+        }
+        
+        .tree {
+            position: absolute;
+            width: 8px;
+            height: 25px;
+            background: #5d4037;
+            bottom: 15px;
+            right: 25px;
+            z-index: 2;
+        }
+        
+        .tree-top {
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background: #4caf50;
+            border-radius: 50%;
+            bottom: 35px;
+            right: 17px;
+            z-index: 1;
+        }
+        
+        .crop-circle {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 2px dashed rgba(76, 175, 80, 0.6);
+            border-radius: 50%;
+            top: 10px;
+            left: 10px;
+        }
+        
+        .sun {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: #ffeb3b;
+            border-radius: 50%;
+            top: 5px;
+            right: 5px;
+            box-shadow: 0 0 10px #ffeb3b;
+        }
+        
+        .logo-content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2e7d32;
+            margin-bottom: 5px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .main-text::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #8bc34a, #4caf50);
+            bottom: -5px;
+            left: 0;
+            border-radius: 3px;
+        }
+        
+        .tagline {
+            font-size: 14px;
+            color: #689f38;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        
+        .organic-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff5722;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .download-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .download-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        
+        .download-btn:hover {
+            background-color: #388E3C;
+        }
+        
+        .size-selector {
+            margin-top: 10px;
+        }
+        
+        .size-btn {
+            background-color: #81C784;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .size-btn:hover {
+            background-color: #689F38;
+        }
+    </style>
+</head>
+<body>
+    <div class="static-logo" id="logo-to-download">
+        <div class="organic-badge">BIO</div>
+        <div class="logo-icon">
+            <div class="crop-circle"></div>
+            <div class="sun"></div>
+            <div class="roof"></div>
+            <div class="farm-house"></div>
+            <div class="barn-door"></div>
+            <div class="tree"></div>
+            <div class="tree-top"></div>
+            <div class="animal"></div>
+        </div>
+        <div class="logo-content">
+            <div class="main-text">GREEN Koupela</div>
+            <div class="tagline">Ferme Biologique & Élevage</div>
+        </div>
+    </div>
+
+    <div class="download-container">
+        <button class="download-btn" id="download-btn">Télécharger le Logo</button>
+        <div class="size-selector">
+            <button class="size-btn" data-size="72">72px</button>
+            <button class="size-btn" data-size="48">48px</button>
+            <button class="size-btn" data-size="96">96px</button>
+            <button class="size-btn" data-size="144">144px</button>
+            <button class="size-btn" data-size="192">192px</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const downloadBtn = document.getElementById('download-btn');
+            const sizeBtns = document.querySelectorAll('.size-btn');
+            let selectedSize = 192; // Taille par défaut
+            
+            // Gestion du choix de la taille
+            sizeBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectedSize = parseInt(this.getAttribute('data-size'));
+                    sizeBtns.forEach(b => b.style.backgroundColor = '#81C784');
+                    this.style.backgroundColor = '#388E3C';
+                });
+            });
+            
+            // Initialisation du premier bouton comme sélectionné
+            sizeBtns[4].style.backgroundColor = '#388E3C';
+            
+            // Fonction de téléchargement
+            downloadBtn.addEventListener('click', function() {
+                const logoElement = document.getElementById('logo-to-download');
+                const originalWidth = logoElement.offsetWidth;
+                const originalHeight = logoElement.offsetHeight;
+                const scale = selectedSize / Math.max(originalWidth, originalHeight);
+                
+                html2canvas(logoElement, {
+                    scale: scale,
+                    width: originalWidth,
+                    height: originalHeight,
+                    backgroundColor: null
+                }).then(canvas => {
+                    const link = document.createElement('a');
+                    link.download = `logo-agricole-${selectedSize}px.png`;
+                    link.href = canvas.toDataURL('image/png');
+                    link.click();
+                });
+            });
+        });
+    </script>
+    
+    <!-- Bibliothèque html2canvas pour convertir HTML en image -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</body>
+</html>

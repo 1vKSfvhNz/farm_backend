@@ -1,0 +1,93 @@
+{
+  "analyse": {
+    "title": "Gestion des Analyses",
+    "performance": "Analyse de Performance",
+    "health": "Analyse de Santé",
+    "production": "Analyse de Production"
+  },
+  "performance": {
+    "title": "Gestion des Performances",
+    "indicators": "Indicateurs Clés de Performance",
+    "export": "Exporter les Données"
+  },
+  "prediction": {
+    "title": "Gestion des Prédictions",
+    "production": "Prédiction de Production",
+    "health": "Prédiction de Santé",
+    "growth": "Prédiction de Croissance"
+  },
+  
+  "user": {
+    "managementTitle": "Gestion des utilisateurs",
+    "searchPlaceholder": "Rechercher un utilisateur...",
+    "noUsersFound": "Aucun utilisateur trouvé",
+    "fetchError": "Erreur lors du chargement des utilisateurs",
+    "deleteTitle": "Supprimer l'utilisateur",
+    "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+    "deleteSuccess": "Utilisateur supprimé avec succès",
+    "addUser": "Ajouter un utilisateur",
+    "userDetails": "Détails de l'utilisateur",
+    "notFound": "Utilisateur non trouvé",
+    "username": "Nom d'utilisateur",
+    "email": "Email",
+    "role": "Rôle",
+    "status": "Statut",
+    "createdAt": "Créé le",
+    "lastLogin": "Dernière connexion",
+    "deactivate": "Désactiver",
+    "activate": "Activer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "statusChanged": "Statut changé à : {status}",
+    "editUser": "Modifier l'utilisateur",
+    "fillRequiredFields": "Veuillez remplir tous les champs obligatoires",
+    "passwordRequired": "Un mot de passe est requis",
+    "passwordsDontMatch": "Les mots de passe ne correspondent pas",
+    "updateSuccess": "Utilisateur mis à jour avec succès",
+    "createSuccess": "Utilisateur créé avec succès",
+    "usernamePlaceholder": "Entrez le nom d'utilisateur",
+    "emailPlaceholder": "Entrez l'email",
+    "passwordPlaceholder": "Entrez le mot de passe",
+    "confirmPasswordPlaceholder": "Confirmez le mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "saveChanges": "Enregistrer les modifications",
+    "createUser": "Créer l'utilisateur",
+    "roles": {
+      "admin": "Administrateur",
+      "manager": "Manager",
+      "manager_agro": "Manager Agriculture",
+      "manager_elevage": "Manager Elevage",
+      "user": "Utilisateur"
+    },
+    "active": "Actif",
+    "inactive": "Inactif"
+  },
+
+  "elevage": {
+    "overview": "Aperçu",
+    "overviewDescription": "Gérez tous les aspects de votre élevage à partir de ce tableau de bord central.",
+    
+    "avicole": "Avicole",
+    "avicoleDescription": "Gestion complète de votre élevage avicole : volailles, ponte, alimentation et santé.",
+    "manageAvicole": "Gérer l'avicole",
+    
+    "bovin": "Bovin",
+    "bovinDescription": "Suivi et gestion de votre cheptel bovin : lait, viande et reproduction.",
+    "manageBovin": "Gérer le bovin",
+    
+    "caprin": "Caprin",
+    "caprinDescription": "Gestion spécialisée pour vos chèvres : lait, fromage et santé du troupeau.",
+    "manageCaprin": "Gérer le caprin",
+    
+    "ovin": "Ovin",
+    "ovinDescription": "Outils pour la gestion de votre élevage ovin : laine, viande et reproduction.",
+    "manageOvin": "Gérer l'ovin",
+    
+    "piscicole": "Piscicole",
+    "piscicoleDescription": "Gestion de votre aquaculture : bassins, alimentation et suivi de croissance.",
+    "managePiscicole": "Gérer le piscicole",
+    
+    "accessDenied": "Accès refusé",
+    "accessDeniedMessage": "Vous n'avez pas les autorisations nécessaires pour accéder à cette section."
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "analyse": {
+    "title": "Analysis Management",
+    "performance": "Performance Analysis",
+    "health": "Health Analysis",
+    "production": "Production Analysis"
+  },
+  "performance": {
+    "title": "Performance Management",
+    "indicators": "Key Performance Indicators",
+    "export": "Export Data"
+  },
+  "prediction": {
+    "title": "Prediction Management",
+    "production": "Production Prediction",
+    "health": "Health Prediction",
+    "growth": "Growth Prediction"
+  },
+  
+  "user": {
+    "managementTitle": "User Management",
+    "searchPlaceholder": "Search for a user...",
+    "noUsersFound": "No users found",
+    "fetchError": "Error loading users",
+    "deleteTitle": "Delete User",
+    "deleteConfirm": "Are you sure you want to delete this user?",
+    "deleteSuccess": "User deleted successfully",
+    "addUser": "Add User",
+    "userDetails": "User Details",
+    "notFound": "User not found",
+    "username": "Username",
+    "email": "Email",
+    "role": "Role",
+    "status": "Status",
+    "createdAt": "Created At",
+    "lastLogin": "Last Login",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "edit": "Edit",
+    "delete": "Delete",
+    "statusChanged": "Status changed to: {status}",
+    "editUser": "Edit User",
+    "fillRequiredFields": "Please fill in all required fields",
+    "passwordRequired": "A password is required",
+    "passwordsDontMatch": "Passwords do not match",
+    "updateSuccess": "User updated successfully",
+    "createSuccess": "User created successfully",
+    "usernamePlaceholder": "Enter username",
+    "emailPlaceholder": "Enter email",
+    "passwordPlaceholder": "Enter password",
+    "confirmPasswordPlaceholder": "Confirm password",
+    "confirmPassword": "Confirm Password",
+    "saveChanges": "Save Changes",
+    "createUser": "Create User",
+    "roles": {
+      "admin": "Administrator",
+      "manager": "Manager",
+      "manager_agro": "Agriculture Manager",
+      "manager_elevage": "Livestock Manager",
+      "user": "User"
+    },
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+
+  "elevage": {
+    "overview": "Livestock Overview",
+    "overviewDescription": "Manage all your livestock activities from this dashboard",
+    "avicole": "Poultry",
+    "avicoleDescription": "Manage your poultry farming activities",
+    "manageAvicole": "Manage Poultry",
+    "bovin": "Cattle",
+    "bovinDescription": "Manage your cattle farming activities",
+    "manageBovin": "Manage Cattle",
+    "caprin": "Goat",
+    "caprinDescription": "Manage your goat farming activities",
+    "manageCaprin": "Manage Goats",
+    "ovin": "Sheep",
+    "ovinDescription": "Manage your sheep farming activities",
+    "manageOvin": "Manage Sheep",
+    "piscicole": "Fish Farming",
+    "piscicoleDescription": "Manage your fish farming activities",
+    "managePiscicole": "Manage Fish Farming",
+    "accessDenied": "Access Denied",
+    "accessDeniedMessage": "You don't have permission to access livestock management"
+  }
+}
+
